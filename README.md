@@ -14,8 +14,6 @@ Example: `-10,3:10,14:2:20` => `[-10, 3, 4, 5, 6, 7, 8, 9, 10, 14, 16, 18, 20]`
 ## Usage
 It is useful to input a bunch of similar commands by piping the input with different numbers.
 
-For example in bash `{1..5}` can be expanded to numbers `1` to `5`, but there isn't an easy way to do that for discontinuous ranges. So with this command, you can have that.
-
 with gnu `parallel` you can run something like: `numrng 1-3,7-8 | parallel echo {}`
 
 Number range can be passed as CLI args, or can be passed from stdin. For stdin, pass `-` instead of the number range, it'll wait for stdin and interpret them. You can pass CLI args range as well as wait for stdin.
@@ -23,6 +21,14 @@ Number range can be passed as CLI args, or can be passed from stdin. For stdin, 
 For example both of the following works
 - `echo "1-3,7-8" | numrng -` => `1, 2, 3, 7, 8`
 - `numrng "1-3,7-8"` => `1, 2, 3, 7, 8`
+
+Bash can by default do something similar but the syntax is different:
+
+| numrng command    | bash equivalent                  |
+|-------------------|----------------------------------|
+| `numrng 1-5`      | `printf "%d\n" {1..5}`           |
+| `numrng 1:2:50`   | `printf "%d\n" {1..50..2}`       |
+| `numrng 1-5,7-10` | `printf "%d\n" {{1..5},{7..10}}` |
 
 ## Installation
 Follow the instructions to [install rust](https://www.rust-lang.org/tools/install). 
