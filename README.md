@@ -18,6 +18,19 @@ For example in bash `{1..5}` can be expanded to numbers `1` to `5`, but there is
 
 with gnu `parallel` you can run something like: `numrng 1-3,7-8 | parallel echo {}`
 
+Number range can be passed as CLI args, or can be passed from stdin. For stdin, pass `-` instead of the number range, it'll wait for stdin and interpret them. You can pass CLI args range as well as wait for stdin.
+
+For example both of the following works
+- `echo "1-3,7-8" | numrng -` => `1, 2, 3, 7, 8`
+- `numrng "1-3,7-8"` => `1, 2, 3, 7, 8`
+
+## Installation
+Follow the instructions to [install rust](https://www.rust-lang.org/tools/install). 
+
+Then with cargo do: `cargo build --release`. You'll have the compiled binary. Move `target/release/numrng` to the path.
+
+For Arch Linux, [AUR package `numrng`](https://aur.archlinux.org/packages/numrng) is available.
+
 ## Extra
  `_` can be used to separate the numbers without it meaning anything. For example: `1_000_000-1_000_100` will go from 1000000 to 1000100.
 
